@@ -8,7 +8,7 @@ if($_POST){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
-		$sql = "SELECT * FROM tienda WHERE usuario='$username' AND clave='$password'";
+		$sql = "SELECT * FROM tienda WHERE usuario='$username' AND clave = md5('$password')";
 
 		if($conn->error){
 			echo 'Ocurrió un error en el registro'.$conn->error;
@@ -27,12 +27,12 @@ if($_POST){
 				exit;
 			}
 		}else{
-			header('Location: ../index.php?error_message=Usuario o clave incorrectos!');
+			header('Location: ../index.php?message=Usuario o clave incorrectos!');
 			exit;
 		}
 		
 	}else{
-		header('Location: ../index.php?error_message=Ingrese todos los datos!');
+		header('Location: ../index.php?message=Ingrese todos los datos!');
 		exit;
 		//echo 'Ingrese todos los datos';
 	}

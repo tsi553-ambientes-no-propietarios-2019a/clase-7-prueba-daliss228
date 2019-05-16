@@ -1,3 +1,6 @@
+<?php
+include('php/conection.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +15,20 @@
 		<input type="password" name="pass1" placeholder="Repetir password"><br><br>
 		<button>Registrar</button>
 	</form>
+	<br><br>
+	<?php
+		if ($_GET) {
+			if (isset($_GET['message'])) {
+				echo $_GET['message'];
+			}
+		}
+	?>
 </body>
 </html>
 
 <?php
 
-include('php/conection.php');
+//include('php/conection.php');
 
 if ($_POST) {
 	if (isset($_POST['nomtienda'])&&isset($_POST['username'])&&isset($_POST['pass'])&&isset($_POST['pass1'])&&!empty($_POST['nomtienda'])&&!empty($_POST['username'])&&!empty($_POST['pass'])&&!empty($_POST['pass1'])) {
@@ -28,16 +39,17 @@ if ($_POST) {
 		$pass1 = $_POST['pass1'];
 
 		if ($pass==$pass1) {
-			$sqlinsert = "INSERT INTO tienda(nombretienda, usuario, clave, repetirclave) VALUES ('$nomtienda', '$username', '$pass', '$pass1')";
+
+			$sqlinsert = "INSERT INTO tienda(nombretienda, usuario, clave) VALUES ('$nomtienda', '$username', md5('$pass'))";
 			$conn->query($sqlinsert);
 
 			if ($conn->error) {
-				header('Location: ../registro_tienda.php?Error en la insercion'.$conn->error);
+				header('Location: ../registro_tienda.php?message=Error en la insercion'.$conn->error);
 				exit;
 			}else{
-				header('Location: index.php?message=Tienda registrada correctamente, puede iniciar sesión.');
-				exit;
+				header('Location: index.php?message=Tienda registrada correctamente, puede iniciar sesión!');
 			}
+
 		}else{
 			echo 'Los passwords no coinciden';
 		}
@@ -46,4 +58,7 @@ if ($_POST) {
 		echo 'Llene todos los campos';
 	}
 }
+
 ?>
+
+

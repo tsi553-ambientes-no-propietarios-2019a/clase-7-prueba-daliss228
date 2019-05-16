@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <?php 
 include('php/conection.php');
-/*if ($_GET) {
-	$message=$_GET['message'];
-	echo $message;
-}*/
-
 ?>
 <html>
 <head>
@@ -20,5 +15,14 @@ include('php/conection.php');
 		<input type="text" name="precio" placeholder="Precio del producto"><br><br>
 		<button>Guardar productos</button>
 	</form>
+	<br><br>
+	<?php
+		if ($_GET) {
+			if (isset($_GET['message'])) {
+				echo $_GET['message'];
+			}
+		}
+	?>
+
 </body>
 </html>

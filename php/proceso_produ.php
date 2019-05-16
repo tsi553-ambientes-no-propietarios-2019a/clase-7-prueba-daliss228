@@ -1,12 +1,11 @@
 <?php
+
+session_start();
 $conn = new mysqli('localhost', 'root', '', 'pruebab1');
+$id=$_SESSION['user']['id'];
 
-if ($_GET) {
-	$cod = $_GET['cod'];
-}
 
-echo $_GET['cod'];
-/*if($_POST){
+if($_POST){
 	if(isset($_POST['nombre'])&&isset($_POST['tipo'])&&isset($_POST['stock'])&&isset($_POST['precio'])&&!empty($_POST['nombre'])&&!empty($_POST['tipo'])&&!empty($_POST['stock'])&&!empty($_POST['precio'])){
 
 
@@ -14,24 +13,23 @@ echo $_GET['cod'];
 		$tipo = $_POST['tipo'];
 		$stock = $_POST['stock'];
 		$precio = $_POST['precio'];
-		
-		//echo "$total";
 
-		$sqlinsert = "INSERT INTO producto(id, nombre, tipo, stock, precio, user) VALUES ('$id', '$nombre', '$tipo', '$stock', '$precio', '$user')";
+		$sqlinsert = "INSERT INTO producto(nombre, tipo, stock, precio, iduser) VALUES ('$nombre', '$tipo', '$stock', '$precio', '$id')";
 
 		$conn->query($sqlinsert);
 
 		if ($conn->error) {
-			header('Location: nuevo_producto.php?message_error=Error en la insercion'.$conn->error);
+			header('Location: ../nuevo_producto.php?message=Error en la insercion!'.$conn->error);
 			exit;
 		}else{
-			echo 'Datos enviados correctamente!';
+			header('Location: ../nuevo_producto.php?message=Datos enviados correctamente!');
+			exit;
 		}
 
 	}else{
-		header('Location: nuevo_producto.php?message_error=Llene todos los campos');
+		header('Location: ../nuevo_producto.php?message=Llene todos los campos!');
 			exit;
 	}
-}*/
+}
 
 ?>

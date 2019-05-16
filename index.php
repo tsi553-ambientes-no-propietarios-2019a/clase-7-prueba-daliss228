@@ -1,19 +1,24 @@
-<?php 
-include('php/conection.php');
-
-?>
+<?php include('php/conection.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registro</title>
+	<title>Inicio</title>
 </head>
 <body>
 	<h2>Login</h2>
 	<form action="php/proceso_login.php" method="POST">
 		<input type="text" name="username" placeholder="Ingrese el nombre de usuario"><br><br>
 		<input type="password" name="password" placeholder="Ingrese el password"><br><br>
-		<button>Ingresar</button>
+		<button>Iniciar sesion</button>
 	</form>
-	<a href="registro_tienda.php">Registrar mi tienda</a>
+	<br><a href="registro_tienda.php">Registrar tienda</a>
+	<br><br>
+	<?php
+		if ($_GET) {
+			if (isset($_GET['message'])) {
+				echo $_GET['message'];
+			}
+		}
+	?>
 </body>
 </html>

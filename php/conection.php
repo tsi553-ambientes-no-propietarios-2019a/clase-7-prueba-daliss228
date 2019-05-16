@@ -23,4 +23,6 @@ $conn = new mysqli('localhost', 'root', '', 'pruebab1');
 		exit;
 	}
 
+
+
 ?>
